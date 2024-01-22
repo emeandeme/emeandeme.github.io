@@ -1,0 +1,51 @@
+name: emeandeme
+description: "A new Flutter project."
+
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.2.4 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: any
+  flutter_gen_runner: ^5.4.0
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/images/logo/
+  fonts:
+    - family: Belleza
+      fonts:
+        - asset: assets/fonts/Belleza-Regular.ttf
+    - family: NotoSerif
+      fonts:
+        - asset: assets/fonts/NotoSerif-Italic-VariableFont_wdth,wght.ttf
+        - asset: assets/fonts/NotoSerif-VariableFont_wdth,wght.ttf
+    - family: Now
+      fonts:
+        - asset: assets/fonts/now/Now-Black.otf
+        - asset: assets/fonts/now/Now-Bold.otf
+        - asset: assets/fonts/now/Now-Light.otf
+        - asset: assets/fonts/now/Now-Medium.otf
+        - asset: assets/fonts/now/Now-Regular.otf
+        - asset: assets/fonts/now/Now-Thin.otf
+        - asset: assets/fonts/now/NowAlt-Black.otf
+        - asset: assets/fonts/now/NowAlt-Bold.otf
+        - asset: assets/fonts/now/NowAlt-Light.otf
+        - asset: assets/fonts/now/NowAlt-Medium.otf
+        - asset: assets/fonts/now/NowAlt-Regular.otf
+        - asset: assets/fonts/now/NowAlt-Thin.otf
