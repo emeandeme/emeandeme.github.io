@@ -57,6 +57,27 @@ final class TimmingTextStyle {
     fontFamily: FontFamily.notoSerif,
     fontWeight: FontWeight.w700,
   );
+  static const place = TextStyle(
+    fontSize: 9.7,
+    color: Colors.black,
+    fontFamily: FontFamily.notoSerif,
+  );
+  static const time = TextStyle(
+    fontSize: 11.4,
+    color: Colors.black,
+    fontFamily: FontFamily.notoSerif,
+  );
+  static const descriptionTitle = TextStyle(
+    fontSize: 12.1,
+    color: Colors.black,
+    fontFamily: FontFamily.notoSerif,
+    fontWeight: FontWeight.w700,
+  );
+  static const description = TextStyle(
+    fontSize: 8.7,
+    color: Colors.black,
+    fontFamily: FontFamily.now,
+  );
 }
 
 final class LodgingsTextStyle {

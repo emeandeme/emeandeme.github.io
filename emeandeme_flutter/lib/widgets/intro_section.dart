@@ -1,13 +1,17 @@
 import 'package:emeandeme/constants/text_styles.dart';
 import 'package:emeandeme/gen/assets.gen.dart';
+import 'package:emeandeme/module_structure/actions.dart';
 import 'package:emeandeme/widgets/sections/template_section.dart';
 import 'package:flutter/material.dart';
 
 class IntroSection extends StatelessWidget with MediaQueryLayaouts {
-  const IntroSection({super.key});
+  const IntroSection({super.key, required this.controller});
+  final ScrollController controller;
 
+  static const double jumpWelcome = 700 * 2;
   @override
   Widget build(BuildContext context) {
+    final genericSize = obtainTemplateSize(context);
     return Stack(
       fit: StackFit.loose,
       children: [
@@ -44,19 +48,31 @@ class IntroSection extends StatelessWidget with MediaQueryLayaouts {
                 ),
                 IntroActions(
                   title: "Bienvenidos",
-                  action: () {},
+                  action: () {
+                    controller.animateTo(jumpWelcome,
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.decelerate);
+                  },
                 ),
                 IntroActions(
                   title: "La Boda",
-                  action: () {},
+                  action: () {
+                    controller.jumpTo(
+                      (jumpWelcome + genericSize),
+                    );
+                  },
                 ),
                 IntroActions(
                   title: "Alojamiento",
-                  action: () {},
+                  action: () {
+                    controller.jumpTo((jumpWelcome + genericSize * 3));
+                  },
                 ),
                 IntroActions(
                   title: "Confirma tu asistencia",
-                  action: () {},
+                  action: () {
+                    controller.jumpTo((jumpWelcome + genericSize * 4));
+                  },
                 ),
               ],
             ),
@@ -74,11 +90,14 @@ class IntroActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(24),
-      child: Text(
-        title.toUpperCase(),
-        style: TextStyles.headerStyle,
+    return ActionInk(
+      onTap: action,
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Text(
+          title.toUpperCase(),
+          style: TextStyles.headerStyle,
+        ),
       ),
     );
   }

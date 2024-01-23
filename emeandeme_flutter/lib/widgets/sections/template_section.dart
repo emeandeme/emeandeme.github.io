@@ -38,4 +38,11 @@ class TemplateSectionSliver extends StatelessWidget with MediaQueryLayaouts {
 mixin MediaQueryLayaouts on Widget {
   bool isSmallScreen(BuildContext context) =>
       MediaQuery.sizeOf(context).width < 847;
+  double get smallSize => 800;
+  double get bigSize => 1600;
+
+  double obtainTemplateSize(BuildContext context) =>
+      isSmallScreen(context) ? bigSize : smallSize;
+
+  double screenWidth(BuildContext context) => MediaQuery.sizeOf(context).width;
 }

@@ -2,7 +2,6 @@ import 'package:emeandeme/widgets/date_section.dart';
 import 'package:emeandeme/widgets/intro_section.dart';
 import 'package:emeandeme/widgets/lodgings_section.dart';
 import 'package:emeandeme/widgets/maps_sections.dart';
-import 'package:emeandeme/widgets/sections/template_section.dart';
 import 'package:emeandeme/widgets/timming_section.dart';
 import 'package:emeandeme/widgets/welcome_section.dart';
 import 'package:flutter/material.dart';
@@ -33,27 +32,33 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Material(
+    final controller = ScrollController();
+    return Material(
       type: MaterialType.transparency,
       child: ColoredBox(
         color: Colors.white,
         child: CustomScrollView(
-          physics: ClampingScrollPhysics(),
+          controller: controller,
+          physics: const ClampingScrollPhysics(),
           slivers: [
-            SliverToBoxAdapter(child: IntroSection()),
             SliverToBoxAdapter(
+              child: IntroSection(
+                controller: controller,
+              ),
+            ),
+            const SliverToBoxAdapter(
               child: DateSection(),
             ),
-            SliverToBoxAdapter(
+            const SliverToBoxAdapter(
               child: WelcomeSection(),
             ),
-            SliverToBoxAdapter(
+            const SliverToBoxAdapter(
               child: TimmingSection(),
             ),
-            SliverToBoxAdapter(
+            const SliverToBoxAdapter(
               child: MapsSection(),
             ),
-            SliverToBoxAdapter(
+            const SliverToBoxAdapter(
               child: LodgingsSection(),
             ),
           ],
