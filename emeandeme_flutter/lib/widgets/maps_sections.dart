@@ -12,6 +12,7 @@ class MapsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const TemplateSectionSliver(
+      preferrizeHeight: 700,
       child: GoogleMapsIframe(),
     );
   }
