@@ -14,50 +14,55 @@ class DateSection extends StatelessWidget {
     return TemplateSectionSliver(
       preferrizeHeight: 700,
       backgroundColor: const Color(0xFFfffcf6),
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text(
-              "¿CUANDO & DÓNDE?",
-              style: TextStyles.dateTitles,
-              textAlign: TextAlign.center,
-            ),
-            separtor,
-            const Text(
-              "26/10/24",
-              style: TextStyles.date,
-              textAlign: TextAlign.center,
-            ),
-            separtor,
-            const SelectionArea(
-              child: Text(
-                "PARQUE DE LA MARQUESA · 12.30 H",
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                "¿CUANDO & DÓNDE?",
                 style: TextStyles.dateTitles,
                 textAlign: TextAlign.center,
               ),
-            ),
-            separtor,
-            ActionInk(
-              onTap: () {},
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  color: const Color(0xFF929c89).withOpacity(0.7),
-                  borderRadius: const BorderRadius.all(
-                    Radius.elliptical(35, 20),
-                  ),
-                ),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
-                  child: Text(
-                    "CONFIRMA TU ASISTENCIA".toUpperCase(),
-                    style: TextStyles.dateButton,
-                  ),
+              separtor,
+              const FittedBox(
+                child: Text(
+                  "26/10/24",
+                  style: TextStyles.date,
+                  textAlign: TextAlign.center,
                 ),
               ),
-            )
-          ],
+              separtor,
+              const SelectionArea(
+                child: Text(
+                  "PARQUE DE LA MARQUESA · 12.30 H",
+                  style: TextStyles.dateTitles,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              separtor,
+              ActionInk(
+                onTap: () {},
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF929c89).withOpacity(0.7),
+                    borderRadius: const BorderRadius.all(
+                      Radius.elliptical(35, 20),
+                    ),
+                  ),
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
+                    child: Text(
+                      "CONFIRMA TU ASISTENCIA".toUpperCase(),
+                      style: TextStyles.dateButton,
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

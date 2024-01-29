@@ -10,16 +10,17 @@ class WelcomeSection extends StatelessWidget with MediaQueryLayaouts {
   Widget build(BuildContext context) {
     final welcomeDescription = SizedBox(
       width: !isSmallScreen(context) ? 550 : null,
-      child: const Column(
+      child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
+          const Text(
             "BIENVENIDOS A NUESTRA BODA",
             style: WelcomeSectionTextStyle.title,
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 32),
-          Text(
+          if (isSmallScreen(context)) const PicturesWelcome(),
+          const SizedBox(height: 32),
+          const Text(
             """Estamos muy felices de que estés leyendo esto, porque después de 9 años, significa que estás a un paso de acompañarnos en el día más importante de nuestra vida juntos.
             
             Durante estos meses vamos a informarte de todo lo que necesitas saber para llegar a nuestro gran día sin ninguna duda.
@@ -28,8 +29,8 @@ class WelcomeSection extends StatelessWidget with MediaQueryLayaouts {
             style: WelcomeSectionTextStyle.descriptions,
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 32),
-          Text(
+          const SizedBox(height: 32),
+          const Text(
             "¿ESTAMOS LISTOS?",
             style: WelcomeSectionTextStyle.subTitle,
             textAlign: TextAlign.center,
@@ -39,16 +40,20 @@ class WelcomeSection extends StatelessWidget with MediaQueryLayaouts {
     );
 
     return TemplateSectionSliver(
+      preferrizeHeight: 800,
       backgroundColor: const Color(0xFF929c89),
-      child: Wrap(
-        runAlignment: WrapAlignment.spaceEvenly,
-        alignment: WrapAlignment.spaceEvenly,
-        crossAxisAlignment: WrapCrossAlignment.center,
-        verticalDirection: VerticalDirection.up,
-        children: [
-          const PicturesWelcome(),
-          welcomeDescription,
-        ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Wrap(
+          runAlignment: WrapAlignment.spaceEvenly,
+          alignment: WrapAlignment.spaceEvenly,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          verticalDirection: VerticalDirection.down,
+          children: [
+            if (!isSmallScreen(context)) const PicturesWelcome(),
+            welcomeDescription,
+          ],
+        ),
       ),
     );
   }
@@ -60,31 +65,32 @@ class PicturesWelcome extends StatelessWidget with MediaQueryLayaouts {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 225,
+      width: isSmallScreen(context) ? null : 225,
       child: Padding(
         padding: const EdgeInsets.all(24),
         child: ColoredBox(
           color: const Color(0xFFfffcf6),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 24, left: 24, right: 24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: _imageBuilder(),
-            ),
+          child: Wrap(
+            runAlignment: WrapAlignment.center,
+            direction: isSmallScreen(context) ? Axis.horizontal : Axis.vertical,
+            children: _imageBuilder(context),
           ),
         ),
       ),
     );
   }
 
-  List<Padding> _imageBuilder() {
+  List<Padding> _imageBuilder(BuildContext context) {
+    final double imageWidh = isSmallScreen(context) ? 100 : 130;
     return [
-      Assets.images.slider1.image(),
-      Assets.images.slider2.image(),
-      Assets.images.slider3.image(),
+      if (!isSmallScreen(context))
+        Assets.images.slider1.image(width: imageWidh),
+      Assets.images.slider2.image(width: imageWidh),
+      Assets.images.slider3.image(width: imageWidh),
     ]
         .map((e) => Padding(
-              padding: const EdgeInsets.only(bottom: 24),
+              padding: const EdgeInsets.only(
+                  bottom: 12, top: 12, left: 12, right: 12),
               child: DecoratedBox(
                   decoration: const BoxDecoration(
                       boxShadow: [BoxShadow(blurRadius: 10)]),

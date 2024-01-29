@@ -21,11 +21,13 @@ class LodgingsSection extends StatelessWidget {
               child: Text(
                 "RECOMENDACIONES DE ALOJAMIENTOS",
                 style: LodgingsTextStyle.title,
+                textAlign: TextAlign.center,
               ),
             ),
             const SizedBox(height: 34),
             Wrap(
               alignment: WrapAlignment.spaceBetween,
+              crossAxisAlignment: WrapCrossAlignment.center,
               children: [
                 HouseLodgingsInfo(
                   image: Assets.images.slider1.provider(),
@@ -111,6 +113,8 @@ class HouseLodgingsInfo extends StatelessWidget {
         onTap: LaunchBean.fromString("https://$description").launch,
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             DecoratedBox(
               decoration: BoxDecoration(
@@ -125,16 +129,19 @@ class HouseLodgingsInfo extends StatelessWidget {
             SelectableText(
               title,
               style: LodgingsTextStyle.name,
+              textAlign: TextAlign.center,
             ),
             extraSmallSeparator,
             const Text(
               "*",
               style: LodgingsTextStyle.name,
+              textAlign: TextAlign.center,
             ),
             extraSmallSeparator,
             Text(
               description,
               style: LodgingsTextStyle.descriptions,
+              textAlign: TextAlign.center,
             ),
             smallSeparator,
             ActionInk(
@@ -142,6 +149,7 @@ class HouseLodgingsInfo extends StatelessWidget {
               child: Text(
                 textNumber,
                 style: LodgingsTextStyle.descriptions,
+                textAlign: TextAlign.center,
               ),
             ),
             separator,
@@ -150,6 +158,7 @@ class HouseLodgingsInfo extends StatelessWidget {
               child: Text(
                 direcction,
                 style: LodgingsTextStyle.descriptions,
+                textAlign: TextAlign.center,
               ),
             ),
           ],

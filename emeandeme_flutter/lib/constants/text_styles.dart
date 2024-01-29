@@ -58,23 +58,23 @@ final class TimmingTextStyle {
     fontWeight: FontWeight.w700,
   );
   static const place = TextStyle(
-    fontSize: 9.7,
+    fontSize: 12,
     color: Colors.black,
     fontFamily: FontFamily.notoSerif,
   );
   static const time = TextStyle(
-    fontSize: 11.4,
+    fontSize: 13,
     color: Colors.black,
     fontFamily: FontFamily.notoSerif,
   );
   static const descriptionTitle = TextStyle(
-    fontSize: 12.1,
+    fontSize: 12,
     color: Colors.black,
     fontFamily: FontFamily.notoSerif,
     fontWeight: FontWeight.w700,
   );
   static const description = TextStyle(
-    fontSize: 8.7,
+    fontSize: 12,
     color: Colors.black,
     fontFamily: FontFamily.now,
   );
