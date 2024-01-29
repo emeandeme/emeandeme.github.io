@@ -11,16 +11,75 @@ class IntroSection extends StatelessWidget with MediaQueryLayaouts {
   static const double jumpWelcome = 700 * 2;
   @override
   Widget build(BuildContext context) {
+    final isSmall = isSmallScreen(context);
     final genericSize = obtainTemplateSize(context);
+    if (isSmall) {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TemplateSectionSliver(
+            backgroundColor: const Color(0xFF929c89),
+            preferrizeHeight: 250,
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 32),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      "¡QUE SÍ, QUE NOS CASAMOS!",
+                      style: TextStyles.headerTitleStyle,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 32.0),
+                      child: Assets.images.logo.logoLight
+                          .image(fit: BoxFit.fitWidth, width: 300),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Stack(
+            fit: StackFit.loose,
+            children: [
+              TemplateSectionSliver(
+                preferrizeHeight: 700,
+                image: Assets.images.introImage.provider(),
+              ),
+              ColoredBox(
+                color: const Color(0xFF929c89).withOpacity(0.4),
+                child: const SizedBox(
+                  height: 700,
+                  width: double.infinity,
+                ),
+              )
+            ],
+          ),
+        ],
+      );
+    }
+
     return Stack(
-      fit: StackFit.loose,
       children: [
         TemplateSectionSliver(
           preferrizeHeight: 700,
-          image: Assets.images.introImage.provider(),
-          child: Center(
+          image: Assets.images.introBig.provider(),
+        ),
+        ColoredBox(
+          color: Colors.black.withOpacity(0.4),
+          child: const SizedBox(
+            height: 700,
+            width: double.infinity,
+          ),
+        ),
+        Center(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 250),
             child: Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Text(
                   "¡QUE SÍ, QUE NOS CASAMOS!",
@@ -35,7 +94,7 @@ class IntroSection extends StatelessWidget with MediaQueryLayaouts {
             ),
           ),
         ),
-        if (!isSmallScreen(context))
+        if (!isSmall)
           DecoratedBox(
             decoration:
                 BoxDecoration(color: const Color(0xFF929c89).withOpacity(0.9)),

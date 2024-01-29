@@ -2,13 +2,47 @@ import 'package:emeandeme/constants/text_styles.dart';
 import 'package:emeandeme/widgets/sections/template_section.dart';
 import 'package:flutter/material.dart';
 
-class TimmingSection extends StatelessWidget with MediaQueryLayaouts {
+class TimmingSection extends StatefulWidget with MediaQueryLayaouts {
   const TimmingSection({super.key});
+
+  @override
+  State<TimmingSection> createState() => _TimmingSectionState();
+}
+
+class _TimmingSectionState extends State<TimmingSection> {
+  final List<GlobalKey> keys = List.generate(5, (index) => GlobalKey());
+  final GlobalKey currentKey = GlobalKey();
+  double positionWidth = 0;
+  List<Offset> circlesOffset = [];
+
+  @override
+  void didChangeDependencies() {
+    // ignore: unused_local_variable
+    final mediaQueryDepence = MediaQuery.of(context);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      final currentOffset =
+          (currentKey.currentContext?.findRenderObject() as RenderBox?)
+              ?.localToGlobal(Offset.zero);
+      circlesOffset = keys
+          .map((e) => (getOffset(e, currentOffset) ?? Offset.zero))
+          .toList();
+
+      positionWidth = (circlesOffset.firstOrNull?.dx ?? 0).abs();
+      setState(() {});
+    });
+    super.didChangeDependencies();
+  }
+
+  Offset? getOffset(GlobalKey key, Offset? currentOffset) {
+    return (key.currentContext?.findRenderObject() as RenderBox?)
+        ?.globalToLocal(currentOffset ?? Offset.zero);
+  }
 
   @override
   Widget build(BuildContext context) {
     return TemplateSectionSliver(
-      preferrizeHeight: 800 + 276,
+      key: currentKey,
+      preferrizeHeight: 800 + 276 + 225,
       backgroundColor: const Color(0xFFfffcf6),
       child: Stack(
         children: [
@@ -21,9 +55,9 @@ class TimmingSection extends StatelessWidget with MediaQueryLayaouts {
                 "TIMMING",
                 style: TimmingTextStyle.title,
               ),
-              _generateRow(
-                context,
-                TimmingDefinition(
+              TimmingLayer(
+                circleKey: keys[0],
+                timmingDefinition: TimmingDefinition(
                   time: "12.00",
                   event: "LA LLEGADA ",
                   description:
@@ -31,9 +65,9 @@ class TimmingSection extends StatelessWidget with MediaQueryLayaouts {
                   positionTimmingBox: PositionTimmingBox.right,
                 ),
               ),
-              _generateRow(
-                context,
-                TimmingDefinition(
+              TimmingLayer(
+                circleKey: keys[1],
+                timmingDefinition: TimmingDefinition(
                   time: "12.30",
                   event: "LA CEREMONIA",
                   description:
@@ -41,19 +75,18 @@ class TimmingSection extends StatelessWidget with MediaQueryLayaouts {
                   positionTimmingBox: PositionTimmingBox.left,
                 ),
               ),
-              _generateRow(
-                context,
-                TimmingDefinition(
+              TimmingLayer(
+                circleKey: keys[2],
+                timmingDefinition: TimmingDefinition(
                   time: "13.30",
                   event: "EL CÓCTEL",
-                  description:
-                      "Momento de fuera nervios y disfrutar",
+                  description: "Momento de fuera nervios y disfrutar",
                   positionTimmingBox: PositionTimmingBox.right,
                 ),
               ),
-              _generateRow(
-                context,
-                TimmingDefinition(
+              TimmingLayer(
+                circleKey: keys[3],
+                timmingDefinition: TimmingDefinition(
                   time: "15.00",
                   event: "LA COMIDA",
                   description:
@@ -61,70 +94,94 @@ class TimmingSection extends StatelessWidget with MediaQueryLayaouts {
                   positionTimmingBox: PositionTimmingBox.left,
                 ),
               ),
-              _generateRow(
-                context,
-                TimmingDefinition(
+              TimmingLayer(
+                circleKey: keys[4],
+                timmingDefinition: TimmingDefinition(
                   time: "18.00",
                   event: "BARRA LIBRE",
-                  description:
-                      "¡A por todas!",
+                  description: "¡A por todas!",
                   positionTimmingBox: PositionTimmingBox.right,
                 ),
               ),
             ],
           ),
-          Center(
-            child: _generateLines(),
-          )
+          if (circlesOffset.isNotEmpty) ...[
+            _generateLines(
+                startOffset: circlesOffset[0], endOffset: circlesOffset[1]),
+            _generateLines(
+                startOffset: circlesOffset[1], endOffset: circlesOffset[2]),
+            _generateLines(
+                startOffset: circlesOffset[2], endOffset: circlesOffset[3]),
+            _generateLines(
+                startOffset: circlesOffset[3], endOffset: circlesOffset[4]),
+          ]
         ],
       ),
     );
   }
 
-  Widget _generateLines() {
-    const circle = DecoratedBox(
-      decoration: BoxDecoration(
+  Widget _generateLines(
+      {required Offset startOffset, required Offset endOffset}) {
+    return Positioned(
+      left: positionWidth + 7,
+      top: (startOffset.dy).abs() + 32,
+      height: (((endOffset.dy).abs() - 18) - (startOffset.dy).abs()) - 26,
+      child: const DecoratedBox(
+        decoration: BoxDecoration(
+          color: Color(0xFF929c89),
+        ),
+        child: FittedBox(child: SizedBox(width: 3, height: 113)),
+      ),
+    );
+  }
+}
+
+enum PositionTimmingBox {
+  left,
+  right;
+
+  T resolve<T>({required T onLeft, required T onRight}) {
+    return switch (this) {
+      PositionTimmingBox.left => onLeft,
+      PositionTimmingBox.right => onRight,
+    };
+  }
+}
+
+final class TimmingDefinition {
+  TimmingDefinition({
+    required this.time,
+    required this.event,
+    required this.description,
+    required this.positionTimmingBox,
+  });
+  final String time;
+  final String event;
+  final String description;
+  final PositionTimmingBox positionTimmingBox;
+}
+
+class TimmingLayer extends StatelessWidget with MediaQueryLayaouts {
+  const TimmingLayer({
+    super.key,
+    required this.timmingDefinition,
+    required this.circleKey,
+  });
+
+  final TimmingDefinition timmingDefinition;
+  final GlobalKey? circleKey;
+
+  @override
+  Widget build(BuildContext context) {
+    final width = (screenWidth(context) * 0.17).clamp(125, 270).toDouble();
+    final circle = DecoratedBox(
+      key: circleKey,
+      decoration: const BoxDecoration(
         color: Color(0xFF929c89),
         shape: BoxShape.circle,
       ),
-      child: SizedBox.square(dimension: 18),
+      child: const SizedBox.square(dimension: 18),
     );
-    const line = DecoratedBox(
-      decoration: BoxDecoration(
-        color: Color(0xFF929c89),
-      ),
-      child: SizedBox(width: 3, height: 119),
-    );
-    return const Column(
-      mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        SizedBox(height: 148),
-        circle,
-        SizedBox(height: 18),
-        line,
-        SizedBox(height: 18),
-        circle,
-        SizedBox(height: 18),
-        line,
-        SizedBox(height: 18),
-        circle,
-        SizedBox(height: 18),
-        line,
-        SizedBox(height: 18),
-        circle,
-        SizedBox(height: 18),
-        line,
-        SizedBox(height: 18),
-        circle,
-      ],
-    );
-  }
-
-  Widget _generateRow(
-      BuildContext context, TimmingDefinition timmingDefinition) {
-    final width = (screenWidth(context) * 0.17).clamp(150, 270).toDouble();
     final box = DecoratedBox(
       decoration: BoxDecoration(
           border: Border.all(
@@ -179,7 +236,9 @@ class TimmingSection extends StatelessWidget with MediaQueryLayaouts {
           const Spacer(),
           timmingDefinition.positionTimmingBox
               .resolve<Widget>(onLeft: box, onRight: text),
-          const SizedBox(width: 86),
+          Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 34),
+              child: circle),
           timmingDefinition.positionTimmingBox
               .resolve<Widget>(onLeft: text, onRight: box),
           const Spacer(),
@@ -187,29 +246,4 @@ class TimmingSection extends StatelessWidget with MediaQueryLayaouts {
       ),
     );
   }
-}
-
-enum PositionTimmingBox {
-  left,
-  right;
-
-  T resolve<T>({required T onLeft, required T onRight}) {
-    return switch (this) {
-      PositionTimmingBox.left => onLeft,
-      PositionTimmingBox.right => onRight,
-    };
-  }
-}
-
-final class TimmingDefinition {
-  TimmingDefinition({
-    required this.time,
-    required this.event,
-    required this.description,
-    required this.positionTimmingBox,
-  });
-  final String time;
-  final String event;
-  final String description;
-  final PositionTimmingBox positionTimmingBox;
 }

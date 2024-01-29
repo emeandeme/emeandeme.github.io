@@ -16,6 +16,10 @@ class $AssetsImagesGen {
   AssetGenImage get mapaMarquesa =>
       const AssetGenImage('assets/images/Mapa_marquesa.png');
 
+  /// File path: assets/images/intro_big.jpg
+  AssetGenImage get introBig =>
+      const AssetGenImage('assets/images/intro_big.jpg');
+
   /// File path: assets/images/intro_image.jpg
   AssetGenImage get introImage =>
       const AssetGenImage('assets/images/intro_image.jpg');
@@ -33,7 +37,7 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values =>
-      [mapaMarquesa, introImage, slider1, slider2, slider3];
+      [mapaMarquesa, introBig, introImage, slider1, slider2, slider3];
 }
 
 class $AssetsImagesLogoGen {
