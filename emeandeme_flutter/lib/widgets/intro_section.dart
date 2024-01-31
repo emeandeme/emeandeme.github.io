@@ -5,14 +5,19 @@ import 'package:emeandeme/widgets/sections/template_section.dart';
 import 'package:flutter/material.dart';
 
 class IntroSection extends StatelessWidget with MediaQueryLayaouts {
-  const IntroSection({super.key, required this.controller});
+  const IntroSection({
+    super.key,
+    required this.controller,
+    required this.jumps,
+  });
   final ScrollController controller;
 
-  static const double jumpWelcome = 700 * 2;
+  final List<double> jumps;
+
   @override
   Widget build(BuildContext context) {
     final isSmall = isSmallScreen(context);
-    final genericSize = obtainTemplateSize(context);
+
     if (isSmall) {
       return Column(
         mainAxisSize: MainAxisSize.min,
@@ -103,12 +108,16 @@ class IntroSection extends StatelessWidget with MediaQueryLayaouts {
               children: [
                 IntroActions(
                   title: "Inicio",
-                  action: () {},
+                  action: () {
+                    controller.jumpTo(
+                      0,
+                    );
+                  },
                 ),
                 IntroActions(
                   title: "Bienvenidos",
                   action: () {
-                    controller.animateTo(jumpWelcome,
+                    controller.animateTo(jumps[0],
                         duration: const Duration(milliseconds: 300),
                         curve: Curves.decelerate);
                   },
@@ -117,20 +126,24 @@ class IntroSection extends StatelessWidget with MediaQueryLayaouts {
                   title: "La Boda",
                   action: () {
                     controller.jumpTo(
-                      (jumpWelcome + genericSize),
+                      jumps[1],
                     );
                   },
                 ),
                 IntroActions(
                   title: "Alojamiento",
                   action: () {
-                    controller.jumpTo((jumpWelcome + genericSize * 3));
+                    controller.jumpTo(
+                      jumps[2],
+                    );
                   },
                 ),
                 IntroActions(
                   title: "Confirma tu asistencia",
                   action: () {
-                    controller.jumpTo((jumpWelcome + genericSize * 4));
+                    controller.jumpTo(
+                      jumps[3],
+                    );
                   },
                 ),
               ],

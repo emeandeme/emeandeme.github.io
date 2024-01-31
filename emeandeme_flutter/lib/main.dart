@@ -1,4 +1,5 @@
 import 'package:emeandeme/widgets/date_section.dart';
+import 'package:emeandeme/widgets/form_section.dart';
 import 'package:emeandeme/widgets/intro_section.dart';
 import 'package:emeandeme/widgets/lodgings_section.dart';
 import 'package:emeandeme/widgets/maps_sections.dart';
@@ -7,6 +8,8 @@ import 'package:emeandeme/widgets/welcome_section.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MyApp());
 }
 
@@ -27,12 +30,48 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final List<GlobalKey> keys = List.generate(7, (index) => GlobalKey());
+  List<double> jumps = [];
+
+  @override
+  void didChangeDependencies() {
+    // ignore: unused_local_variable
+    final mediaQueryDepence = MediaQuery.of(context);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      final sizes = keys
+          .map((e) =>
+              (e.currentContext?.findRenderObject() as RenderBox).size.height)
+          .toList();
+
+      jumps = [
+        sizes[0] + sizes[1],
+        sizes[0] + sizes[1] + sizes[2],
+        sizes[0] + sizes[1] + sizes[2] + sizes[3] + sizes[4],
+        sizes[0] + sizes[1] + sizes[2] + sizes[3] + sizes[4] + sizes[5]
+      ];
+
+      setState(() {});
+    });
+    super.didChangeDependencies();
+  }
+
+  Offset? getOffset(GlobalKey key, Offset? currentOffset) {
+    return (key.currentContext?.findRenderObject() as RenderBox?)
+        ?.globalToLocal(currentOffset ?? Offset.zero);
+  }
 
   @override
   Widget build(BuildContext context) {
     final controller = ScrollController();
+
     return Material(
       type: MaterialType.transparency,
       child: ColoredBox(
@@ -43,24 +82,41 @@ class Home extends StatelessWidget {
           slivers: [
             SliverToBoxAdapter(
               child: IntroSection(
+                key: keys[0],
                 controller: controller,
+                jumps: jumps,
               ),
             ),
-            const SliverToBoxAdapter(
-              child: DateSection(),
+            SliverToBoxAdapter(
+              child: DateSection(
+                key: keys[1],
+              ),
             ),
-            const SliverToBoxAdapter(
-              child: WelcomeSection(),
+            SliverToBoxAdapter(
+              child: WelcomeSection(
+                key: keys[2],
+              ),
             ),
-            const SliverToBoxAdapter(
-              child: TimmingSection(),
+            SliverToBoxAdapter(
+              child: TimmingSection(
+                key: keys[3],
+              ),
             ),
-            const SliverToBoxAdapter(
-              child: MapsSection(),
+            SliverToBoxAdapter(
+              child: MapsSection(
+                key: keys[4],
+              ),
             ),
-            const SliverToBoxAdapter(
-              child: LodgingsSection(),
+            SliverToBoxAdapter(
+              child: LodgingsSection(
+                key: keys[5],
+              ),
             ),
+            SliverToBoxAdapter(
+              child: FormSection(
+                key: keys[6],
+              ),
+            )
           ],
         ),
       ),
