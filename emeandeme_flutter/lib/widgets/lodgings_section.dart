@@ -30,7 +30,7 @@ class LodgingsSection extends StatelessWidget {
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
                 HouseLodgingsInfo(
-                  image: Assets.images.slider1.provider(),
+                  image: Assets.images.hoteles.archyval.provider(),
                   title: "APARTAHOTEL ARCHYVAL",
                   description: "www.apartamentosarchyval.com",
                   textNumber: "968 67 48 22",
@@ -39,7 +39,7 @@ class LodgingsSection extends StatelessWidget {
                       "https://www.google.es/maps/place/Apartamentos+turisticos+Archybal/@38.1200698,-1.3004258,17z/data=!3m2!4b1!5s0xd647a180d6ccf9b:0x8657b464fb4ed24!4m9!3m8!1s0xd647a1881b885f5:0xe66b79c746131612!5m2!4m1!1i2!8m2!3d38.1200698!4d-1.2978509!16s%2Fg%2F1wc499g9?entry=ttu",
                 ),
                 HouseLodgingsInfo(
-                  image: Assets.images.slider1.provider(),
+                  image: Assets.images.hoteles.hyltor.provider(),
                   title: "HOTEL HYLTOR",
                   description: "www.hotelhyltor.com",
                   textNumber: "968 68 82 05",
@@ -119,8 +119,11 @@ class HouseLodgingsInfo extends StatelessWidget {
             DecoratedBox(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: image,
-                ),
+                    image: image,
+                    colorFilter: const ColorFilter.mode(
+                      Colors.grey,
+                      BlendMode.saturation,
+                    )),
                 shape: BoxShape.circle,
               ),
               child: const SizedBox.square(dimension: 250),
