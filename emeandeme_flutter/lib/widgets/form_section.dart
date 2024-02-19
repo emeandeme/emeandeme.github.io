@@ -18,13 +18,15 @@ class _FormSectionState extends State<FormSection> {
     return TemplateSectionSliver(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 60),
-        child: WebViewX(
-          width: (MediaQuery.of(context).size.width * 0.77),
-          height: 300,
-          onWebViewCreated: (controller) => webviewController = controller,
-          initialSourceType: SourceType.url,
-          initialContent:
-              "https://docs.google.com/forms/d/e/1FAIpQLScUQE7onIpfGpl1hFmEtJcU4k2frkf0XjEVrDe07HXLJoAUcA/viewform?embedded=true",
+        child: Center(
+          child: WebViewX(
+            width: (MediaQuery.of(context).size.width * 0.77),
+            height: widget.obtainTemplateSize(context),
+            onWebViewCreated: (controller) => webviewController = controller,
+            initialSourceType: SourceType.url,
+            initialContent:
+                "https://docs.google.com/forms/d/e/1FAIpQLScUQE7onIpfGpl1hFmEtJcU4k2frkf0XjEVrDe07HXLJoAUcA/viewform?embedded=true",
+          ),
         ),
       ),
     );
