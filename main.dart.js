@@ -40198,7 +40198,7 @@ A.bj(s,null,t.w).toString
 $.a7.rx$.push(new A.abb(this))
 this.d3()},
 K(a){var s,r,q,p,o,n=this,m=null,l=n.d,k=t.p
-l=A.a([A.hy(A.a([B.PY,new A.l3(new A.nj("12.00","LA LLEGADA ","Manu estar\xe1 esper\xe1ndote en la entrada de nuestra ceremonia, as\xed que toma asiento que esto empieza!",B.iG),l[0],m),new A.l3(new A.nj("12.30","LA CEREMONIA","Ser\xe1 bonita, emotiva y nada nos  har\xe1 m\xe1s ilusi\xf3n de que t\xfa est\xe9s all\xed, \xa1No tenemos un plan mejor!",B.vC),l[1],m),new A.l3(new A.nj("13.30","EL C\xd3CTEL","Momento de fuera nervios y disfrutar",B.iG),l[2],m),new A.l3(new A.nj("15.00","LA COMIDA","A\xfan queda lo mejor as\xed que deja descansar un poquito los pies y prep\xe1rate para el broche final",B.vC),l[3],m),new A.l3(new A.nj("18.00","BARRA LIBRE","\xa1A por todas!",B.iG),l[4],m)],k),B.aR,B.aJ,B.cs)],k)
+l=A.a([A.hy(A.a([B.PY,new A.l3(new A.nj("12.30","LA LLEGADA ","Manu estar\xe1 esper\xe1ndote en la entrada de nuestra ceremonia, as\xed que toma asiento que esto empieza!",B.iG),l[0],m),new A.l3(new A.nj("13:00","LA CEREMONIA","Ser\xe1 bonita, emotiva y nada nos  har\xe1 m\xe1s ilusi\xf3n de que t\xfa est\xe9s all\xed, \xa1No tenemos un plan mejor!",B.vC),l[1],m),new A.l3(new A.nj("14:00","EL C\xd3CTEL","Momento de fuera nervios y disfrutar",B.iG),l[2],m),new A.l3(new A.nj("15.30","LA COMIDA","A\xfan queda lo mejor as\xed que deja descansar un poquito los pies y prep\xe1rate para el broche final",B.vC),l[3],m),new A.l3(new A.nj("18.00","BARRA LIBRE","\xa1A por todas!",B.iG),l[4],m)],k),B.aR,B.aJ,B.cs)],k)
 s=n.r
 if(s.length!==0){r=s[0]
 r=n.tx(s[1],r)
