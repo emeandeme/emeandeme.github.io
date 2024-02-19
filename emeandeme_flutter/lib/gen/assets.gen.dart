@@ -16,6 +16,8 @@ class $AssetsImagesGen {
   AssetGenImage get mapaMarquesa =>
       const AssetGenImage('assets/images/Mapa_marquesa.png');
 
+  $AssetsImagesHotelesGen get hoteles => const $AssetsImagesHotelesGen();
+
   /// File path: assets/images/intro_big.jpg
   AssetGenImage get introBig =>
       const AssetGenImage('assets/images/intro_big.jpg');
@@ -38,6 +40,21 @@ class $AssetsImagesGen {
   /// List of all assets
   List<AssetGenImage> get values =>
       [mapaMarquesa, introBig, introImage, slider1, slider2, slider3];
+}
+
+class $AssetsImagesHotelesGen {
+  const $AssetsImagesHotelesGen();
+
+  /// File path: assets/images/hoteles/ARCHYVAL.png
+  AssetGenImage get archyval =>
+      const AssetGenImage('assets/images/hoteles/ARCHYVAL.png');
+
+  /// File path: assets/images/hoteles/HYLTOR.jpg
+  AssetGenImage get hyltor =>
+      const AssetGenImage('assets/images/hoteles/HYLTOR.jpg');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [archyval, hyltor];
 }
 
 class $AssetsImagesLogoGen {
