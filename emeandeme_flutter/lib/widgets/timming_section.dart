@@ -58,7 +58,7 @@ class _TimmingSectionState extends State<TimmingSection> {
               TimmingLayer(
                 circleKey: keys[0],
                 timmingDefinition: TimmingDefinition(
-                  time: "12.00",
+                  time: "12.30",
                   event: "LA LLEGADA ",
                   description:
                       "Manu estará esperándote en la entrada de nuestra ceremonia, así que toma asiento que esto empieza!",
@@ -68,7 +68,7 @@ class _TimmingSectionState extends State<TimmingSection> {
               TimmingLayer(
                 circleKey: keys[1],
                 timmingDefinition: TimmingDefinition(
-                  time: "12.30",
+                  time: "13:00",
                   event: "LA CEREMONIA",
                   description:
                       "Será bonita, emotiva y nada nos  hará más ilusión de que tú estés allí, ¡No tenemos un plan mejor!",
@@ -78,7 +78,7 @@ class _TimmingSectionState extends State<TimmingSection> {
               TimmingLayer(
                 circleKey: keys[2],
                 timmingDefinition: TimmingDefinition(
-                  time: "13.30",
+                  time: "14:00",
                   event: "EL CÓCTEL",
                   description: "Momento de fuera nervios y disfrutar",
                   positionTimmingBox: PositionTimmingBox.right,
@@ -87,7 +87,7 @@ class _TimmingSectionState extends State<TimmingSection> {
               TimmingLayer(
                 circleKey: keys[3],
                 timmingDefinition: TimmingDefinition(
-                  time: "15.00",
+                  time: "15.30",
                   event: "LA COMIDA",
                   description:
                       "Aún queda lo mejor así que deja descansar un poquito los pies y prepárate para el broche final",
