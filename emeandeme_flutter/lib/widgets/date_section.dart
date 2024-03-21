@@ -4,8 +4,8 @@ import 'package:emeandeme/widgets/sections/template_section.dart';
 import 'package:flutter/material.dart';
 
 class DateSection extends StatelessWidget {
-  const DateSection({super.key});
-
+  const DateSection({super.key, required this.jumpToForm});
+  final VoidCallback jumpToForm;
   static const size = 700;
 
   @override
@@ -43,7 +43,9 @@ class DateSection extends StatelessWidget {
               ),
               separtor,
               ActionInk(
-                onTap: () {},
+                onTap: () {
+                  jumpToForm.call();
+                },
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     color: const Color(0xFF929c89).withOpacity(0.7),
