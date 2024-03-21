@@ -1,7 +1,6 @@
 import 'package:emeandeme/widgets/sections/template_section.dart';
 import 'package:flutter/material.dart';
-
-import 'package:webviewx/webviewx.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 
 class FormSection extends StatefulWidget with MediaQueryLayaouts {
   const FormSection({super.key});
