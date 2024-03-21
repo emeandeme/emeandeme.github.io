@@ -90,6 +90,11 @@ class _HomeState extends State<Home> {
             SliverToBoxAdapter(
               child: DateSection(
                 key: keys[1],
+                jumpToForm: () {
+                  controller.jumpTo(
+                    jumps[3],
+                  );
+                },
               ),
             ),
             SliverToBoxAdapter(
